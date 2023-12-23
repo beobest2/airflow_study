@@ -29,8 +29,8 @@ with DAG('postgres_loader',
     sql_sensor = SqlSensor(task_id='wait_for_condition',
                         conn_id='my_postgres_connection',
                         sql="SELECT COUNT(*) FROM sample_table WHERE key='hello1'",
-                        mode='poke',
-                        poke_interval=30,
+                        mode='reschedule',
+                        poke_interval=5,
                         dag=dag)
     
     sql_query_confirm = '''

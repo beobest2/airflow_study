@@ -4,11 +4,11 @@ from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.utils.dates import days_ago
 
-def generate_number(ti):
+def generate_number(**context):
     number = random.randint(0, 100)
     print(f"Generated number: {number}")
     # push the integer
-    ti.xcom_push(
+    context["ti"].xcom_push(
         key='random_number',
         value=number)
     # # push the json
